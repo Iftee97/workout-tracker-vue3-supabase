@@ -22,14 +22,12 @@ export default {
     const appReady = ref(null);
 
     const user = supabase.auth.user();
-    console.log("current user:", user);
 
     if (!user) {
       appReady.value = true;
     }
 
-    supabase.auth.onAuthStateChange((event, session) => {
-      console.log(event, session);
+    supabase.auth.onAuthStateChange((_, session) => {
       store.methods.setUser(session);
       appReady.value = true;
     });
