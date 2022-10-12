@@ -101,7 +101,7 @@ export default {
           });
           console.log("registered user:", user);
           if (error) throw error;
-          router.push({ name: "Login" }); // redirect to login page
+          router.push({ name: "Home" }); // redirect to Home page
         } catch (error) {
           errorMsg.value = error.message;
           setTimeout(() => {

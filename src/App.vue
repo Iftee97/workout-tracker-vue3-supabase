@@ -1,11 +1,14 @@
 <template>
-  <div class="min-h-full font-Poppins box-border">
+  <div v-if="appReady" class="min-h-full font-Poppins box-border">
     <Navigation />
     <router-view />
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
+import { supabase } from "./supabase/init";
+import store from "./store/index";
 import Navigation from "./components/Navigation.vue";
 
 export default {
@@ -16,7 +19,24 @@ export default {
   },
 
   setup() {
-    return {};
+    const appReady = ref(null);
+
+    const user = supabase.auth.user();
+    console.log("current user:", user);
+
+    if (!user) {
+      appReady.value = true;
+    }
+
+    supabase.auth.onAuthStateChange((event, session) => {
+      console.log(event, session);
+      store.methods.setUser(session);
+      appReady.value = true;
+    });
+
+    return {
+      appReady,
+    };
   },
 };
 </script>
