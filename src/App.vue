@@ -8,7 +8,7 @@
 <script>
 import { ref } from "vue";
 import { supabase } from "./supabase/init";
-import store from "./store/index";
+import { useUserStore } from "./PiniaStore/UserStore";
 import Navigation from "./components/Navigation.vue";
 
 export default {
@@ -20,15 +20,15 @@ export default {
 
   setup() {
     const appReady = ref(null);
-
-    const user = supabase.auth.user();
+    const userStore = useUserStore();
+    const user = userStore.user;
 
     if (!user) {
       appReady.value = true;
     }
 
     supabase.auth.onAuthStateChange((_, session) => {
-      store.methods.setUser(session);
+      userStore.setUser(session);
       appReady.value = true;
     });
 

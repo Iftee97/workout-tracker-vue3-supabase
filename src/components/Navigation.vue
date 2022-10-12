@@ -38,14 +38,15 @@
 import { computed } from "vue";
 import { supabase } from "../supabase/init";
 import { useRouter } from "vue-router";
-import store from "../store/index";
+// import store from "../store/index";
+import { useUserStore } from "../PiniaStore/UserStore";
 
 export default {
   name: "Navigation",
 
   setup() {
-    const user = computed(() => store.state.user);
-
+    const userStore = useUserStore();
+    const user = computed(() => userStore.user);
     const router = useRouter();
 
     // logout function
