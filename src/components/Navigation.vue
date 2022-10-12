@@ -25,6 +25,9 @@
         >
           Login
         </router-link>
+        <li v-if="user">
+          user: <span class="font-bold">{{ user.email }}</span>
+        </li>
         <li v-if="user" class="cursor-pointer" @click="logout">Logout</li>
       </ul>
     </nav>
