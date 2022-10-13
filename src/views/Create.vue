@@ -267,6 +267,12 @@ export default {
     const statusMsg = ref(null);
     const errorMsg = ref(null);
 
+    // listens for changing in workout type input
+    const workoutChange = () => {
+      exercises.value = [];
+      addExercise();
+    };
+
     // add exercise -- to add another exercise input group to the form
     const addExercise = () => {
       if (workoutType.value === "strength") {
@@ -298,12 +304,6 @@ export default {
           errorMsg.value = null;
         }, 5000);
       }
-    };
-
-    // listens for changing in workout type input
-    const workoutChange = () => {
-      exercises.value = [];
-      addExercise();
     };
 
     // create workout
