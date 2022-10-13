@@ -41,7 +41,7 @@
           shadow-md
           cursor-pointer
         "
-        :to="{ name: '' }"
+        :to="{ name: 'View-Workout' }"
         v-for="(workout, index) in data"
         :key="index"
       >
