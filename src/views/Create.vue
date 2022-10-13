@@ -15,7 +15,7 @@
         class="flex flex-col gap-y-5 w-full"
         @submit.prevent="createWorkout"
       >
-        <h1 class="text-2xl text-at-light-green">Record Workout</h1>
+        <h1 class="text-2xl text-at-light-green">Create Workout</h1>
 
         <!-- workout name -->
         <div class="flex flex-col">
