@@ -9,5 +9,7 @@ createApp(App)
   .use(createPinia())
   .mount("#app")
 
+// start: npm run serve
+
 // this project will need some serious refactoring
 // - upgrade to supabase v2
