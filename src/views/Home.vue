@@ -3,75 +3,19 @@
     <!-- if no data -->
     <div v-if="data.lenght === 0" class="w-full flex flex-col items-center">
       <h1 class="text-2xl">No exercises...</h1>
-      <router-link
-        :to="{ name: 'Create' }"
-        class="
-          mt-6
-          py-2
-          px-6
-          rounded-sm
-          text-sm text-white
-          bg-at-light-green
-          duration-200
-          border-solid border-2 border-transparent
-          hover:border-at-light-green hover:bg-white hover:text-at-light-green
-        "
-      >
-        Create Workout
-      </router-link>
+      <router-link :to="{ name: 'Create' }" class="mt-6 py-2 px-6 rounded-sm text-sm text-white bg-at-light-green duration-200 border-solid border-2 border-transparent hover:border-at-light-green hover:bg-white hover:text-at-light-green"> Create Workout </router-link>
     </div>
 
     <!-- if data -->
-    <div
-      v-else
-      class="
-        grid grid-cols-1
-        sm:grid-cols-2
-        md:grid-cols-3
-        lg:grid-cols-4
-        gap-6
-      "
-    >
-      <router-link
-        class="
-          flex flex-col
-          items-center
-          bg-light-grey
-          p-8
-          shadow-md
-          cursor-pointer
-        "
-        :to="{ name: 'View-Workout', params: { workoutId: workout.id } }"
-        v-for="(workout, index) in data"
-        :key="index"
-      >
+    <div v-else class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <router-link class="flex flex-col items-center bg-light-grey p-8 shadow-md cursor-pointer" :to="{ name: 'View-Workout', params: { workoutId: workout.id } }" v-for="(workout, index) in data" :key="index">
         <!-- cardio image -->
-        <img
-          v-if="workout.workoutType === 'cardio'"
-          class="h-24 w-auto"
-          src="@/assets/images/running-light-green.png"
-          alt=""
-        />
+        <img v-if="workout.workoutType === 'cardio'" class="h-24 w-auto" src="@/assets/images/running-light-green.png" alt="" />
 
         <!-- strength training image -->
-        <img
-          v-else
-          class="h-24 w-auto"
-          src="@/assets/images/dumbbell-light-green.png"
-          alt=""
-        />
+        <img v-else class="h-24 w-auto" src="@/assets/images/dumbbell-light-green.png" alt="" />
 
-        <p
-          class="
-            mt-6
-            py-1
-            px-3
-            text-xs text-white
-            bg-at-light-green
-            shadow-md
-            rounded-lg
-          "
-        >
+        <p class="mt-6 py-1 px-3 text-xs text-white bg-at-light-green shadow-md rounded-lg">
           {{ workout.workoutType }}
         </p>
 
@@ -84,11 +28,11 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { supabase } from "../supabase/init";
+import { ref } from 'vue';
+import { supabase } from '../supabase/init';
 
 export default {
-  name: "Home",
+  name: 'Home',
 
   setup() {
     const data = ref([]);
@@ -97,9 +41,7 @@ export default {
     // Fetch data from supabase
     const getData = async () => {
       try {
-        let { data: workouts, error } = await supabase
-          .from("workouts")
-          .select("*");
+        let { data: workouts, error } = await supabase.from('workouts').select('*');
         if (error) throw error;
         data.value = workouts;
         dataLoaded.value = true;
